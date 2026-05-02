@@ -49,7 +49,9 @@ export default async function AdminClientesPage() {
     const cid = log.cliente_id as string;
     if (!playsByClienteId[cid]) playsByClienteId[cid] = [];
     if (playsByClienteId[cid].length < 5) {
-      const musicas = log.musicas as { nome: string } | null;
+      const musicas = Array.isArray(log.musicas)
+        ? (log.musicas[0] as { nome: string } | undefined) ?? null
+        : (log.musicas as { nome: string } | null);
       playsByClienteId[cid].push({
         id: log.id as string,
         musica: musicas?.nome ?? "—",

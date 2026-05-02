@@ -122,8 +122,12 @@ export default async function AdminPage() {
           <div className="overflow-hidden rounded-xl border border-[#1E1E1E] bg-[#1A1A1A]">
             <ul role="list">
               {recentLogs.map((log, i) => {
-                const musica = log.musicas as { nome: string } | null;
-                const academia = log.clientes_academias as { razao_social: string } | null;
+                const musica = Array.isArray(log.musicas)
+                  ? (log.musicas[0] as { nome: string } | undefined) ?? null
+                  : (log.musicas as { nome: string } | null);
+                const academia = Array.isArray(log.clientes_academias)
+                  ? (log.clientes_academias[0] as { razao_social: string } | undefined) ?? null
+                  : (log.clientes_academias as { razao_social: string } | null);
                 return (
                   <li
                     key={log.id as string}
