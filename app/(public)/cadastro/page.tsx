@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Music2 } from "lucide-react";
@@ -28,7 +28,7 @@ function isPlanoId(value: string | null): value is PlanoId {
   return value === "basico" || value === "pro";
 }
 
-export default function CadastroPage() {
+function CadastroContent() {
   const searchParams = useSearchParams();
   const planoParam = searchParams.get("plano");
   const planoInicial: PlanoId = isPlanoId(planoParam) ? planoParam : "basico";
@@ -150,5 +150,13 @@ export default function CadastroPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function CadastroPage() {
+  return (
+    <Suspense>
+      <CadastroContent />
+    </Suspense>
   );
 }
