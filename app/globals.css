@@ -1,0 +1,231 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-barlow);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Tema "Energia Elétrica" — Gym Music IA
+   Paleta: #F97316 laranja | #EF4444 vermelho | #0A0A0A fundo | #1A1A1A superfícies | #333333 bordas */
+
+:root,
+.dark {
+  /* Fundo: #0A0A0A */
+  --background: oklch(0.065 0 0);
+  --foreground: oklch(1 0 0);
+
+  /* Superfícies/cards: #1A1A1A */
+  --card: oklch(0.135 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.135 0 0);
+  --popover-foreground: oklch(1 0 0);
+
+  /* Primária: #F97316 laranja — hover #EA6E0A */
+  --primary: oklch(0.705 0.213 47.604);
+  --primary-foreground: oklch(1 0 0);
+
+  /* Secundária: superfície levemente elevada */
+  --secondary: oklch(0.18 0 0);
+  --secondary-foreground: oklch(1 0 0);
+
+  /* Muted: #999999 texto auxiliar */
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.63 0 0);
+
+  /* Accent: laranja suave para hover de itens */
+  --accent: oklch(0.18 0 0);
+  --accent-foreground: oklch(0.705 0.213 47.604);
+
+  /* Destrutivo: #EF4444 vermelho */
+  --destructive: oklch(0.577 0.245 27.325);
+
+  /* Bordas: #333333 */
+  --border: oklch(0.27 0 0);
+
+  /* Input: fundo #0A0A0A, borda laranja no foco via --ring */
+  --input: oklch(0.14 0 0);
+  --ring: oklch(0.705 0.213 47.604);
+
+  --radius: 0.5rem;
+
+  /* Sidebar */
+  --sidebar: oklch(0.105 0 0);
+  --sidebar-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.705 0.213 47.604);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.18 0 0);
+  --sidebar-accent-foreground: oklch(0.705 0.213 47.604);
+  --sidebar-border: oklch(0.27 0 0);
+  --sidebar-ring: oklch(0.705 0.213 47.604);
+
+  /* Status badges (custom) */
+  --status-ativa: #F97316;
+  --status-trial: #EAB308;
+  --status-inadimplente: #EF4444;
+  --status-cancelada: #666666;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ============================================================
+   Hero Animations — "Energia Elétrica"
+   ============================================================ */
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.06; transform: scale(1); }
+  50%       { opacity: 0.13; transform: scale(1.12); }
+}
+
+@keyframes eq-dance {
+  0%, 100% { transform: scaleY(0.12); }
+  50%       { transform: scaleY(1); }
+}
+
+.hero-fade-up {
+  animation: hero-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* opacity: 0 state is in the keyframe `from`, so no need to set it here */
+}
+
+.hero-glow {
+  animation: glow-breathe 5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq-dance var(--eq-dur, 1.2s) ease-in-out infinite;
+  animation-delay: var(--eq-delay, 0s);
+}
+
+/* ============================================================
+   Scroll Reveal — sections abaixo do hero
+   Usa animation-timeline: view() (Chrome 115+, Firefox 114+)
+   Degrada graciosamente: sem suporte → elemento visível normalmente
+   ============================================================ */
+
+@keyframes scroll-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: scroll-fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+}
+
+/* ============================================================
+   FAQ Accordion — grid-rows height transition (sem JS de medição)
+   ============================================================ */
+
+.faq-content {
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Demo Player Visualizer
+   ============================================================ */
+
+@keyframes eq-mini {
+  0%, 100% { transform: scaleY(0.18); }
+  50%       { transform: scaleY(1); }
+}
+
+.eq-mini-bar {
+  transform: scaleY(0.18);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+
+.visualizer-playing .eq-mini-bar {
+  animation: eq-mini var(--eq-dur, 0.9s) ease-in-out infinite;
+  animation-delay: var(--eq-delay, 0s);
+}
+
+/* Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .hero-glow { animation: none; opacity: 0.08; }
+  .eq-bar    { animation: none; transform: scaleY(0.25); }
+  .scroll-reveal { animation: none; opacity: 1; transform: none; }
+  .visualizer-playing .eq-mini-bar { animation: none; transform: scaleY(0.5); }
+}
