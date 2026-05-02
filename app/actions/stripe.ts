@@ -1,6 +1,6 @@
 "use server";
 
-import { stripe } from "@/lib/stripe";
+import Stripe from "stripe";
 import { createAdminClient } from "@/lib/supabase/server";
 
 type Plano = "basico" | "pro";
@@ -30,6 +30,9 @@ export async function createCheckoutSession(
   plano: Plano
 ): Promise<CheckoutState> {
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: "2025-04-30.basil",
+    });
     const admin = createAdminClient();
 
     // Busca dados da academia

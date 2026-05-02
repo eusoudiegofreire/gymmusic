@@ -1,7 +1,7 @@
 "use server";
 
+import Stripe from "stripe";
 import { createServerClient, createAdminClient } from "@/lib/supabase/server";
-import { stripe } from "@/lib/stripe";
 
 export interface AdminClienteState {
   error?: string;
@@ -25,6 +25,9 @@ export async function cancelarAssinatura(
   try {
     await assertAdmin();
 
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: "2025-04-30.basil",
+    });
     const admin = createAdminClient();
 
     const { data: cliente } = await admin
